@@ -4,9 +4,41 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./styles/normalize.css" />
     <link rel="stylesheet" href="./styles/style.css" />
-    <title>Document</title>
+    <title>PixaBay</title>
   </head>
-  <body></body>
+  <body>
+    <header class="header-section">
+      <div class="header-content">
+        <img src="./img/logo.png" alt="" class="logo" />
+        <p class="sub-text">Find free image resources here.</p>
+
+        <form action="./search.html">
+          <input
+            type="text"
+            autocomplete="off"
+            name="search"
+            class="search-box"
+            placeholder="Search Image"
+          />
+          <button class="search-btn" type="submit">Search</button>
+        </form>
+      </div>
+    </header>
+
+    <!-- Gallery -->
+    <section class="gallery">
+      <!-- <img
+        src="https://unsplash.com/photos/7rI7GSBsKko/download?ixid=MnwxMjA3fDB8MXxhbGx8MTR8fHx8fHwyfHwxNjUyMTAzMTUw&force=true&w=640"
+        class="gallery-img"
+      /> -->
+    </section>
+
+    <script src="./script.js"></script>
+  </body>
 </html>

@@ -1,0 +1,120 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+.header-section {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-image: url("https://unsplash.com/photos/z0gDv24X3uQ/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjUyMDk0Nzg2&force=true&w=2400");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.logo {
+  width: 600px;
+}
+
+.sub-text {
+  padding: 20px 0 30px;
+  font-size: 20px;
+  color: #ffffff;
+  font-weight: 300;
+  text-transform: capitalize;
+  word-spacing: 2px;
+  position: relative;
+}
+
+.sub-text::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 1px;
+  background: #fff;
+}
+
+.sub-text::before {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-box {
+  display: block;
+  margin: 50px auto 20px;
+  padding: 10px;
+  width: 80%;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  text-transform: capitalize;
+}
+
+.search-btn {
+  background-image: linear-gradient(
+    to right,
+    #232526 0%,
+    #414345 51%,
+    #232526 100%
+  );
+}
+.search-btn {
+  margin: 10px;
+  padding: 10px 45px;
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  display: block;
+}
+
+.search-btn:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Gallery */
+
+.gallery {
+  width: 100%;
+  padding: 40px;
+  background-color: #fff;
+  columns: 4;
+  column-gap: 20px;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  background: #f9f9f9;
+}
