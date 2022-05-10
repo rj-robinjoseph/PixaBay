@@ -1,4 +1,7 @@
+let searchParam = location.search.split("=").pop();
 const gallery = document.querySelector(".gallery");
+
+// https://api.unsplash.com/photos/random/?client_id=dzsTZaTv8aLsnOI027DXMSbs6r5133Wxh2dj7T7hCOk&query=cars&per_page=50
 
 // Random Image Changing
 
@@ -42,6 +45,7 @@ let allImages; //This will store all the images.
 const count = 30;
 const apiKey = "dzsTZaTv8aLsnOI027DXMSbs6r5133Wxh2dj7T7hCOk";
 const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${count}`;
+const searchUrl = `https://api.unsplash.com/search/photos/?client_id=${apiKey}&query=${searchParam}&per_page=50`;
 
 function imageLoaded() {
   imagesLoaded++;
@@ -61,9 +65,9 @@ function setAttributes(element, attributes) {
 // Create Elements For LInks & Photos, Add to DOM
 function displayPhotos() {
   imagesLoaded = 0;
-  totalImages = photosArray.length;
+  totalImages = allImages.length;
   // Run function for each object in photosArray
-  photosArray.forEach((photo, index) => {
+  allImages.forEach((photo, index) => {
     // const item = document.createElement("a");
     // setAttributes(item, {
     //   href: photo.links.html,
@@ -104,6 +108,19 @@ async function getPhotos() {
   }
 }
 
+//Search photos using keyword.
+// async function searchPhotos() {
+//   try {
+//     const response = await fetch(searchUrl);
+//     photosArray1 = await response.json();
+//     allImages = photosArray1;
+//     displayPhotos();
+//     // console.log(photosArray1);
+//   } catch (error) {
+//     // Catch Error hERE
+//   }
+// }
+
 window.addEventListener("scroll", () => {
   if (
     (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000) &
@@ -136,7 +153,12 @@ const showPopup = (photo, index) => {
     popup.classList.remove("active");
   });
 };
+
+// if ((searchParam = "")) {
 getPhotos();
+// } else {
+// searchPhotos();
+// }
 
 // Controls
 

@@ -155,6 +155,7 @@ form {
 .popup.active .close-btn,
 .popup.active .image-name,
 .popup.active .index,
+.popup.active .download-btn,
 .popup.active .watermark,
 .popup.active .large-image,
 .popup.active .arrow-btn {
@@ -194,7 +195,7 @@ form {
   -webkit-tap-highlight-color: transparent;
 }
 
-button {
+.download-btn {
   width: 150px;
   height: 40px;
   cursor: pointer;
@@ -206,20 +207,21 @@ button {
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
   background: #e62222;
   margin-top: 5px;
+  opacity: 0;
 }
 
-button,
-button span {
+.download-btn,
+.download-btn span {
   transition: 200ms;
 }
 
-button .text {
+.download-btn .text {
   transform: translateX(35px);
   color: white;
   font-weight: bold;
 }
 
-button .icon {
+.download-btn .icon {
   position: absolute;
   border-left: 1px solid #c41b1b;
   transform: translateX(110px);
@@ -230,26 +232,26 @@ button .icon {
   justify-content: center;
 }
 
-button img {
+.download-btn img {
   width: 20px;
   fill: #eee;
 }
 
-button:hover {
+.download-btn:hover {
   background: #ff3636;
 }
 
-button:hover .text {
+.download-btn:hover .text {
   color: transparent;
 }
 
-button:hover .icon {
+.download-btn:hover .icon {
   width: 150px;
   border-left: none;
   transform: translateX(0);
 }
 
-button:focus {
+.download-btn:focus {
   outline: none;
 }
 
