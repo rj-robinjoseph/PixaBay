@@ -22,9 +22,9 @@ function randomImage() {
   ];
   var size = images.length;
   var x = Math.floor(size * Math.random());
-  console.log(x);
+
   var element = document.getElementsByClassName("header-section");
-  console.log(element);
+
   element[0].style["background-image"] = "url(" + images[x] + ")";
 }
 
@@ -36,6 +36,7 @@ let ready = false;
 let imagesLoaded = 0;
 let totalImages = 0;
 let photosArray = [];
+let currentImage = 0;
 
 const count = 30;
 const apiKey = "dzsTZaTv8aLsnOI027DXMSbs6r5133Wxh2dj7T7hCOk";
@@ -45,8 +46,7 @@ function imageLoaded() {
   imagesLoaded++;
   if (imagesLoaded === totalImages) {
     ready = true;
-    loader.hidden = true;
-    count = 30;
+
     piUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${count}`;
   }
 }
@@ -62,12 +62,12 @@ function displayPhotos() {
   imagesLoaded = 0;
   totalImages = photosArray.length;
   // Run function for each object in photosArray
-  photosArray.forEach((photo) => {
-    const item = document.createElement("a");
-    setAttributes(item, {
-      href: photo.links.html,
-      target: "_blank",
-    });
+  photosArray.forEach((photo, index) => {
+    // const item = document.createElement("a");
+    // setAttributes(item, {
+    //   href: photo.links.html,
+    //   target: "_blank",
+    // });
 
     const img = document.createElement("img");
     setAttributes(img, {
@@ -79,8 +79,14 @@ function displayPhotos() {
 
     img.addEventListener("load", imageLoaded);
 
-    item.appendChild(img);
-    gallery.appendChild(item);
+    // item.appendChild(img);
+    // gallery.appendChild(item);
+    gallery.appendChild(img);
+
+    img.addEventListener("click", () => {
+      currentImage = index;
+      showPopup(photo);
+    });
   });
 }
 
@@ -105,6 +111,23 @@ window.addEventListener("scroll", () => {
   }
 });
 
+const showPopup = (photo) => {
+  const popup = document.querySelector(".popup");
+  const downloadBtn = document.querySelector(".download-btn");
+  const closeBtn = document.querySelector(".close-btn");
+  const image = document.querySelector(".large-image");
+
+  popup.classList.add("active");
+  downloadBtn.addEventListener("click", () => {
+    // console.log("Clicked");
+    window.open(photo.links.html, "_blank");
+  });
+  image.src = photo.urls.regular;
+
+  closeBtn.addEventListener("click", () => {
+    popup.classList.remove("active");
+  });
+};
 getPhotos();
 
 // For limited Image Fetching

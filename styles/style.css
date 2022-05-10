@@ -124,3 +124,194 @@ form {
   cursor: pointer;
   background: #f9f9f9;
 }
+
+/* popup */
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 80%;
+  max-width: 1600px;
+  height: 90vh;
+  max-height: 800px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  overflow: hidden;
+  transition: 1s;
+  opacity: 0;
+}
+
+.popup.active {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+.popup.active .close-btn,
+.popup.active .image-name,
+.popup.active .index,
+.popup.active .large-image,
+.popup.active .arrow-btn {
+  opacity: 1;
+  transition: opacity 0.5s;
+  transition-delay: 1s;
+}
+
+.top-bar {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: #000;
+  color: #fff;
+  text-align: center;
+  line-height: 50px;
+  font-weight: 300;
+}
+
+.image-name {
+  opacity: 0;
+  text-align: center;
+  margin: 0 50px;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  width: 150px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background: red;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  background: #e62222;
+  margin-top: 5px;
+}
+
+button,
+button span {
+  transition: 200ms;
+}
+
+button .text {
+  transform: translateX(35px);
+  color: white;
+  font-weight: bold;
+}
+
+button .icon {
+  position: absolute;
+  border-left: 1px solid #c41b1b;
+  transform: translateX(110px);
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button img {
+  width: 20px;
+  fill: #eee;
+}
+
+button:hover {
+  background: #ff3636;
+}
+
+button:hover .text {
+  color: transparent;
+}
+
+button:hover .icon {
+  width: 150px;
+  border-left: none;
+  transform: translateX(0);
+}
+
+button:focus {
+  outline: none;
+}
+
+.close-btn {
+  opacity: 0;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #f00;
+  cursor: pointer;
+}
+
+.arrow-btn {
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px;
+  border-radius: 50%;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.left-arrow {
+  left: 10px;
+}
+
+.right-arrow {
+  right: 10px;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.arrow-btn:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.index {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 80px;
+  font-weight: 100;
+  color: rgba(255, 255, 255, 0.4);
+  opacity: 0;
+}
+
+.large-image {
+  margin-top: 5%;
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  opacity: 0;
+}
+
+#lightbox.active {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
