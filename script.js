@@ -41,6 +41,7 @@ let currentImage = 0;
 const count = 30;
 const apiKey = "dzsTZaTv8aLsnOI027DXMSbs6r5133Wxh2dj7T7hCOk";
 const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${count}`;
+// const imageName = document.querySelector(".image-name");
 
 function imageLoaded() {
   imagesLoaded++;
@@ -111,7 +112,7 @@ window.addEventListener("scroll", () => {
   }
 });
 
-const showPopup = (photo) => {
+const showPopup = (photo, index) => {
   const popup = document.querySelector(".popup");
   const downloadBtn = document.querySelector(".download-btn");
   const closeBtn = document.querySelector(".close-btn");
@@ -123,6 +124,9 @@ const showPopup = (photo) => {
     window.open(photo.links.html, "_blank");
   });
   image.src = photo.urls.regular;
+  image.addEventListener("click", () => {
+    console.log(`Clicked`);
+  });
 
   closeBtn.addEventListener("click", () => {
     popup.classList.remove("active");
