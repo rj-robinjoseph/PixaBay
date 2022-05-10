@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles/normalize.css" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/search.css" />
+
+    <title>PixaBay-Search</title>
+  </head>
+  <body>
+    <form action="./search.html" id="search-container" class="search-container">
+      <input
+        type="text"
+        autocomplete="off"
+        name="search"
+        class="search-box"
+        placeholder="Search Image"
+      />
+      <button class="search-btn" type="submit">Search</button>
+    </form>
+    <!-- popup -->
+    <div class="popup">
+      <!-- top bar -->
+      <div class="top-bar">
+        <p class="image-name">img1.png</p>
+        <button class="noselect download-btn">
+          <span class="text">View</span
+          ><span class="icon">
+            <img src="./img/arrow-right.png" alt="" />
+          </span>
+        </button>
+        <img src="./img/close.png" alt="" class="close-btn" />
+        <!-- <span class="close-btn"></span> -->
+      </div>
+      <!-- arrows -->
+      <button class="arrow-btn left-arrow">
+        <img
+          src="https://github.com/kunaal438/image-popup/blob/master/img/arrow.png?raw=true"
+          alt=""
+        />
+      </button>
+      <button class="arrow-btn right-arrow">
+        <img
+          src="https://github.com/kunaal438/image-popup/blob/master/img/arrow.png?raw=true"
+          alt=""
+        />
+      </button>
+      <!-- image -->
+
+      <img
+        src="https://unsplash.com/photos/bZmxvwSY8tA/download?ixid=MnwxMjA3fDB8MXxhbGx8MTd8fHx8fHwyfHwxNjUyMTYxMjMw&force=true&w=2400"
+        class="large-image"
+        alt=""
+      />
+      <!-- image-index -->
+
+      <!-- <h1 class="index">PB</h1> -->
+      <img src="./img/diaphragm.png" alt="" class="watermark" />
+    </div>
+
+    <!-- Gallery -->
+    <section class="gallery">
+      <!-- <img
+        src="https://unsplash.com/photos/7rI7GSBsKko/download?ixid=MnwxMjA3fDB8MXxhbGx8MTR8fHx8fHwyfHwxNjUyMTAzMTUw&force=true&w=640"
+        class="gallery-img"
+      /> -->
+    </section>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
