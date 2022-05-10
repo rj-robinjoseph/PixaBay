@@ -37,11 +37,11 @@ let imagesLoaded = 0;
 let totalImages = 0;
 let photosArray = [];
 let currentImage = 0;
+let allImages; //This will store all the images.
 
 const count = 30;
 const apiKey = "dzsTZaTv8aLsnOI027DXMSbs6r5133Wxh2dj7T7hCOk";
 const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${count}`;
-// const imageName = document.querySelector(".image-name");
 
 function imageLoaded() {
   imagesLoaded++;
@@ -96,7 +96,9 @@ async function getPhotos() {
   try {
     const response = await fetch(apiUrl);
     photosArray = await response.json();
+    allImages = photosArray;
     displayPhotos();
+    console.log(photosArray);
   } catch (error) {
     // Catch Error hERE
   }
@@ -117,15 +119,17 @@ const showPopup = (photo, index) => {
   const downloadBtn = document.querySelector(".download-btn");
   const closeBtn = document.querySelector(".close-btn");
   const image = document.querySelector(".large-image");
+  const imageName = document.querySelector(".image-name");
+  const imageIndex = document.querySelector(".index");
 
   popup.classList.add("active");
   downloadBtn.addEventListener("click", () => {
-    // console.log("Clicked");
     window.open(photo.links.html, "_blank");
   });
   image.src = photo.urls.regular;
+  imageName.innerHTML = `Img-` + photo.id + `.jpg`;
   image.addEventListener("click", () => {
-    console.log(`Clicked`);
+    console.log(`Clicked` + index);
   });
 
   closeBtn.addEventListener("click", () => {
@@ -133,6 +137,25 @@ const showPopup = (photo, index) => {
   });
 };
 getPhotos();
+
+// Controls
+
+const prevBtn = document.querySelector(".left-arrow");
+const nxtBtn = document.querySelector(".right-arrow");
+
+prevBtn.addEventListener("click", () => {
+  if (currentImage > 0) {
+    currentImage--;
+    showPopup(allImages[currentImage]);
+  }
+});
+
+nxtBtn.addEventListener("click", () => {
+  if (currentImage < allImages.length - 1) {
+    currentImage++;
+    showPopup(allImages[currentImage]);
+  }
+});
 
 // For limited Image Fetching
 
