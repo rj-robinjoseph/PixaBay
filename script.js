@@ -1,3 +1,4 @@
+AOS.init();
 let searchParam = location.search.split("=").pop();
 let gallery = document.querySelector(".gallery");
 
@@ -143,4 +144,21 @@ nxtBtn.addEventListener("click", () => {
     currentImage++;
     showPopup(allImages[currentImage]);
   }
+});
+
+// // Scroll-To-Top
+
+const scrollBtn = document.getElementById("button");
+
+window.addEventListener("scroll", () => {
+  if (window.innerHeight + window.scrollY >= 2000) {
+    scrollBtn.classList.add("show");
+  } else {
+    scrollBtn.classList.remove("show");
+  }
+});
+
+scrollBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 });
