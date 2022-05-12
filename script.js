@@ -1,10 +1,19 @@
 let searchParam = location.search.split("=").pop();
-const gallery = document.querySelector(".gallery");
+let gallery = document.querySelector(".gallery");
 
-// https://api.unsplash.com/photos/random/?client_id=dzsTZaTv8aLsnOI027DXMSbs6r5133Wxh2dj7T7hCOk&query=cars&per_page=50
+const count = 30;
+const apiKey = "dzsTZaTv8aLsnOI027DXMSbs6r5133Wxh2dj7T7hCOk";
+const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${count}`;
+const searchUrl = `https://api.unsplash.com/search/photos/?client_id=${apiKey}&query=${searchParam}&per_page=50`;
 
-// Random Image Changing
+function imageLoaded() {
+  imagesLoaded++;
+  if (imagesLoaded === totalImages) {
+    ready = true;
 
+    piUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${count}`;
+  }
+}
 function randomImage() {
   var images = [
     "https://unsplash.com/photos/TtN03jUTA70/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8MTZ8fGxhbmQlMjBzY2FwZXxlbnwwfHx8fDE2NTIxMDYxNTU&force=true&w=2400",
@@ -33,93 +42,51 @@ function randomImage() {
 
 document.addEventListener("DOMContentLoaded", randomImage);
 
-// Infinite Image Fetching
+//
 
+// Infinite Image Fetching..
+
+let allImages; //This will store all the images.
+let currentImage = 0;
 let ready = false;
 let imagesLoaded = 0;
 let totalImages = 0;
-let photosArray = [];
-let currentImage = 0;
-let allImages; //This will store all the images.
 
-const count = 30;
-const apiKey = "dzsTZaTv8aLsnOI027DXMSbs6r5133Wxh2dj7T7hCOk";
-const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${count}`;
-const searchUrl = `https://api.unsplash.com/search/photos/?client_id=${apiKey}&query=${searchParam}&per_page=50`;
+const getImage = () => {
+  fetch(apiUrl)
+    .then((res) => res.json())
+    .then((data) => {
+      allImages = data;
+      makeImages(allImages);
+    });
+};
 
-function imageLoaded() {
-  imagesLoaded++;
-  if (imagesLoaded === totalImages) {
-    ready = true;
+const searchImage = () => {
+  fetch(searchUrl)
+    .then((res) => res.json())
+    .then((data) => {
+      allImages = data.results;
+      makeImages(allImages);
+    });
+};
 
-    piUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${count}`;
-  }
-}
-
-function setAttributes(element, attributes) {
-  for (const key in attributes) {
-    element.setAttribute(key, attributes[key]);
-  }
-}
-
-// Create Elements For LInks & Photos, Add to DOM
-function displayPhotos() {
+const makeImages = (data) => {
   imagesLoaded = 0;
   totalImages = allImages.length;
-  // Run function for each object in photosArray
-  allImages.forEach((photo, index) => {
-    // const item = document.createElement("a");
-    // setAttributes(item, {
-    //   href: photo.links.html,
-    //   target: "_blank",
-    // });
-
-    const img = document.createElement("img");
-    setAttributes(img, {
-      src: photo.urls.regular,
-      class: "gallery-img",
-      alt: photo.alt_desciption,
-      title: photo.alt_desciption,
-    });
+  data.forEach((item, index) => {
+    let img = document.createElement("img");
+    img.src = item.urls.regular;
+    img.className = "gallery-img";
 
     img.addEventListener("load", imageLoaded);
-
-    // item.appendChild(img);
-    // gallery.appendChild(item);
     gallery.appendChild(img);
 
     img.addEventListener("click", () => {
       currentImage = index;
-      showPopup(photo);
+      showPopup(item);
     });
   });
-}
-
-//Get photos from Unsplah API
-async function getPhotos() {
-  try {
-    const response = await fetch(apiUrl);
-    photosArray = await response.json();
-    allImages = photosArray;
-    displayPhotos();
-    console.log(photosArray);
-  } catch (error) {
-    // Catch Error hERE
-  }
-}
-
-//Search photos using keyword.
-// async function searchPhotos() {
-//   try {
-//     const response = await fetch(searchUrl);
-//     photosArray1 = await response.json();
-//     allImages = photosArray1;
-//     displayPhotos();
-//     // console.log(photosArray1);
-//   } catch (error) {
-//     // Catch Error hERE
-//   }
-// }
+};
 
 window.addEventListener("scroll", () => {
   if (
@@ -127,24 +94,24 @@ window.addEventListener("scroll", () => {
     ready
   ) {
     ready = false;
-    getPhotos();
+    getImage();
   }
 });
 
-const showPopup = (photo, index) => {
+const showPopup = (item, index) => {
   const popup = document.querySelector(".popup");
   const downloadBtn = document.querySelector(".download-btn");
   const closeBtn = document.querySelector(".close-btn");
   const image = document.querySelector(".large-image");
   const imageName = document.querySelector(".image-name");
-  const imageIndex = document.querySelector(".index");
+  // const imageIndex = document.querySelector(".index");
 
   popup.classList.add("active");
   downloadBtn.addEventListener("click", () => {
-    window.open(photo.links.html, "_blank");
+    window.open(item.links.html, "_blank");
   });
-  image.src = photo.urls.regular;
-  imageName.innerHTML = `Img-` + photo.id + `.jpg`;
+  image.src = item.urls.regular;
+  imageName.innerHTML = `Img-` + item.id + `.jpg`;
   image.addEventListener("click", () => {
     console.log(`Clicked` + index);
   });
@@ -154,12 +121,11 @@ const showPopup = (photo, index) => {
   });
 };
 
-// if ((searchParam = "")) {
-getPhotos();
-// } else {
-// searchPhotos();
-// }
-
+if (searchParam != "") {
+  searchImage();
+} else {
+  getImage();
+}
 // Controls
 
 const prevBtn = document.querySelector(".left-arrow");
@@ -178,28 +144,3 @@ nxtBtn.addEventListener("click", () => {
     showPopup(allImages[currentImage]);
   }
 });
-
-// For limited Image Fetching
-
-// let allImages; //This will store all the images.
-
-// const getImage = () => {
-//   fetch(apiUrl)
-//     .then((res) => res.json())
-//     .then((data) => {
-//       allImages = data;
-//       makeImages(allImages);
-//     });
-// };
-
-// const makeImages = (data) => {
-//   data.forEach((item, index) => {
-//     let img = document.createElement("img");
-//     img.src = item.urls.regular;
-//     img.className = "gallery-img";
-
-//     gallery.appendChild(img);
-//   });
-// };
-
-// getImage();
