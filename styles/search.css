@@ -32,7 +32,7 @@ form {
   margin-left: -25px;
 }
 
-#button {
+/* #button {
   display: inline-block;
   align-items: center;
   background-color: #15133c;
@@ -68,4 +68,26 @@ form {
 #button.show {
   opacity: 1;
   visibility: visible;
+} */
+
+@media screen and (max-width: 850px) {
+  .main-logo {
+    margin-right: 15px;
+    margin-left: unset;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  form {
+    flex-direction: column;
+    padding: 100px 0;
+  }
+  .search-box {
+    border-radius: 5px;
+    margin: 15px 0 20px;
+    width: 80%;
+  }
+  .search-btn {
+    border-radius: 5px;
+  }
 }
